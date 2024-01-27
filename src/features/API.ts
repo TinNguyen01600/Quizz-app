@@ -1,6 +1,7 @@
 // create logic for fetching data from the API
 
 import axios from "axios";
+import { shuffleArray } from "./uitls";
 
 export type Question = {
 	category: string;
@@ -24,5 +25,11 @@ export const fetchQuizQuestions = async (
 		`https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=multiple`
 	);
 	const data = res.data;
-    console.log(data)
+	return data.results.map((question: Question) => ({
+		...question,
+		answers: shuffleArray([
+			...question.incorrect_answers,
+			question.correct_answer,
+		]),
+	}));
 };
