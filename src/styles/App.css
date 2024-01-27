@@ -1,0 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Single+Day&display=swap");
+body {
+  font-family: "Single Day", cursive;
+  background: url(".././img/bg.jpg") no-repeat center center/cover;
+  height: 50vh;
+  background-attachment: fixed;
+}/*# sourceMappingURL=App.css.map */
