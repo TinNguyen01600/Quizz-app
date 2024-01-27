@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import QuestionCard from "./components/QuestionCard";
 import { fetchQuizQuestions, Difficulty, QuestionState } from "./features/API";
+import spinner from "./img/spinner.gif";
 
 const TOTAL_QUESTIONS = 10;
 type AnswerObject = {
@@ -14,7 +15,7 @@ function App() {
 	const [loading, setLoading] = useState(false);
 	const [questions, setQuestions] = useState<QuestionState[]>([]);
 	const [number, setNumber] = useState(0);
-	const [userAnswer, setUserAnswer] = useState<AnswerObject[]>([]);
+	const [userAnswers, setuserAnswers] = useState<AnswerObject[]>([]);
 	const [score, setScore] = useState(0);
 	const [gameOver, setGameOver] = useState(true);
 
@@ -27,34 +28,60 @@ function App() {
 		);
 		setQuestions(newQuestions);
 		setScore(0);
-		setUserAnswer([]);
+		setuserAnswers([]);
 		setNumber(0);
 		setLoading(false);
 	};
-	const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {};
+	const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
+		if (!gameOver) {
+			// User's answer
+			const answer = e.currentTarget.value;
+			// check answer against the correct answer
+			const correct = questions[number].correct_answer === answer;
+			// adjust the score
+			{
+				correct && setScore((prev) => prev + 1);
+			}
+			// save answer in the array for user answers
+			const answerObject = {
+				question: questions[number].question,
+				answer,
+				correct,
+				correctAnswer: questions[number].correct_answer,
+			};
+			setuserAnswers((prev) => [...prev, answerObject]);
+		}
+	};
 	const nextQuestion = () => {};
 
 	return (
 		<>
 			<h1>REACT QUIZZ</h1>
-			{gameOver || userAnswer.length === TOTAL_QUESTIONS ? (
+			{gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
 				<button className="start" onClick={startTrivia}>
 					Start
 				</button>
 			) : null}
-			<p className="score">Score: </p>
-			<p>Loading Questions ...</p>
-			{/* <QuestionCard
-				questionNr={number+1}
-				answers={questions[number].answers}
-				callback={checkAnswer}
-				userAnswer={userAnswer ? userAnswer[number] : undefined}
-				question={questions[number].question}
-				totalQuestions={TOTAL_QUESTIONS}
-			/> */}
-			<button className="next" onClick={nextQuestion}>
-				Next Question
-			</button>
+			{!gameOver && <p className="score">Score: {score}</p>}
+			{loading && <img src={spinner} alt="Loading" />}
+			{!loading && !gameOver && (
+				<QuestionCard
+					questionNr={number + 1}
+					answers={questions[number].answers}
+					callback={checkAnswer}
+					userAnswers={userAnswers ? userAnswers[number] : undefined}
+					question={questions[number].question}
+					totalQuestions={TOTAL_QUESTIONS}
+				/>
+			)}
+			{!loading &&
+				!gameOver &&
+				userAnswers.length === number + 1 &&
+				number !== TOTAL_QUESTIONS - 1 && (
+					<button className="next" onClick={nextQuestion}>
+						Next Question
+					</button>
+				)}
 		</>
 	);
 }
