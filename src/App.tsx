@@ -2,14 +2,10 @@ import React, { useState } from "react";
 import QuestionCard from "./components/QuestionCard";
 import { fetchQuizQuestions, Difficulty, QuestionState } from "./features/API";
 import spinner from "./img/spinner.gif";
+import { AnswerObject } from "./components/QuestionCard";
 
 const TOTAL_QUESTIONS = 10;
-type AnswerObject = {
-	question: string;
-	answer: string;
-	correct: boolean;
-	correctAnswer: string;
-};
+
 
 function App() {
 	const [loading, setLoading] = useState(false);
@@ -52,7 +48,15 @@ function App() {
 			setuserAnswers((prev) => [...prev, answerObject]);
 		}
 	};
-	const nextQuestion = () => {};
+	const nextQuestion = () => {
+		// move on to the next question if not the last ques
+		const nextQuestion = number + 1;
+		if (nextQuestion === TOTAL_QUESTIONS) {
+			setGameOver(true);
+		} else {
+			setNumber(nextQuestion);
+		}
+	};
 
 	return (
 		<>
