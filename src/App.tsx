@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import QuestionCard from "./components/QuestionCard";
 import { fetchQuizQuestions, Difficulty, QuestionState } from "./features/API";
+//@ts-ignore
 import spinner from "./img/spinner.gif";
 import { AnswerObject } from "./components/QuestionCard";
+import { GlobalStyle } from "./styles/App.styles";
 
 const TOTAL_QUESTIONS = 10;
-
 
 function App() {
 	const [loading, setLoading] = useState(false);
@@ -60,6 +61,7 @@ function App() {
 
 	return (
 		<>
+			<GlobalStyle />
 			<h1>REACT QUIZZ</h1>
 			{gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
 				<button className="start" onClick={startTrivia}>
