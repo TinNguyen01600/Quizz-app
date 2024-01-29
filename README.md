@@ -25,6 +25,7 @@ Credit video [React / Typescript Tutorial - Build a Quiz App](https://www.youtub
 -   React + Vite
 -   HTML / CSS
 -   Axios
+-   Material UI
 -   Styled-component
 -   Framer-motion
 
@@ -70,6 +71,9 @@ npm run dev
 
 <pre>
 Package use: 
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.6",
     "@types/styled-components": "^5.1.34",
     "axios": "^1.6.7",
     "react": "^18.2.0",

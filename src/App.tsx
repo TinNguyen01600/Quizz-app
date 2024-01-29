@@ -5,6 +5,7 @@ import { fetchQuizQuestions, Difficulty, QuestionState } from "./features/API";
 import spinner from "./img/spinner.gif";
 import { AnswerObject } from "./components/QuestionCard";
 import { GlobalStyle, Wrapper } from "./styles/App.styles";
+import Filter from "./components/filter/Filter";
 
 const TOTAL_QUESTIONS = 10;
 
@@ -65,9 +66,12 @@ function App() {
 			<Wrapper>
 				<h1>REACT QUIZZ</h1>
 				{gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
-					<button className="start" onClick={startTrivia}>
-						Start
-					</button>
+					<>
+						<Filter />
+						<button className="start" onClick={startTrivia}>
+							Start
+						</button>
+					</>
 				) : null}
 				{!gameOver && <p className="score">Score: {score}</p>}
 				{loading && <img src={spinner} alt="Loading" />}
