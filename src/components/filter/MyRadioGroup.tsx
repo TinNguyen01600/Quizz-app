@@ -3,14 +3,14 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import { useState } from "react";
 
-type Props = {};
-const MyRadioGroup: React.FC<Props> = ({}) => {
-	const [value, setValue] = useState("female");
-
+type Props = {
+	category: string;
+	setCategory: (category: string) => void;
+};
+const MyRadioGroup: React.FC<Props> = ({ category, setCategory }) => {
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setValue((event.target as HTMLInputElement).value);
+		setCategory((event.target as HTMLInputElement).value);
 	};
 	return (
 		<FormControl>
@@ -19,25 +19,65 @@ const MyRadioGroup: React.FC<Props> = ({}) => {
 				sx={{
 					fontSize: "5vh",
 					fontFamily: "Single Day",
+					color: "yellow",
 				}}
 			>
 				Categories
 			</FormLabel>
 			<RadioGroup
+				row
 				aria-labelledby="demo-controlled-radio-buttons-group"
 				name="controlled-radio-buttons-group"
-				value={value}
+				value={category}
 				onChange={handleChange}
+				sx={{ color: "purple" }}
+				// sx={{}}
 			>
-				<FormControlLabel value="art" control={<Radio />} label="Art" />
+				<FormControlLabel
+					value="art"
+					control={<Radio sx={radioStyle} />}
+					label="Art"
+				/>
 				<FormControlLabel
 					value="animals"
-					control={<Radio />}
+					control={<Radio sx={radioStyle} />}
 					label="Animals"
+				/>
+				<FormControlLabel
+					value="geography"
+					control={<Radio sx={radioStyle} />}
+					label="Geography"
+				/>
+				<FormControlLabel
+					value="history"
+					control={<Radio sx={radioStyle} />}
+					label="History"
+				/>
+				<FormControlLabel
+					value="sports"
+					control={<Radio sx={radioStyle} />}
+					label="Sports"
+				/>
+				<FormControlLabel
+					value="celebrities"
+					control={<Radio sx={radioStyle} />}
+					label="Celebrities"
+				/>
+				<FormControlLabel
+					value="politics"
+					control={<Radio sx={radioStyle} />}
+					label="Politics"
 				/>
 			</RadioGroup>
 		</FormControl>
 	);
+};
+
+const radioStyle: object = {
+	color: "purple",
+	"&.Mui-checked": {
+		color: "purple",
+	},
 };
 
 export default MyRadioGroup;

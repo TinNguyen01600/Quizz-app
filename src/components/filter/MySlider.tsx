@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 
 type Props = {
 	totalQuestions: number;
-	setTotalQuestions: any;
+	setTotalQuestions: (totalQuestions: number) => void;
 };
 const MySlider: React.FC<Props> = ({ totalQuestions, setTotalQuestions }) => {
 	const handleChange = (event: Event, newValue: number | number[]) => {

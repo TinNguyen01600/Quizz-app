@@ -4,13 +4,15 @@ import MyRadioGroup from "./MyRadioGroup";
 
 const Filter = () => {
 	const [totalQuestions, setTotalQuestions] = useState<number>(10);
+	const [category, setCategory] = useState<string>("art");
+
 	return (
 		<>
 			<MySlider
 				totalQuestions={totalQuestions}
 				setTotalQuestions={setTotalQuestions}
 			/>
-            <MyRadioGroup />
+			<MyRadioGroup category={category} setCategory={setCategory} />
 		</>
 	);
 };
