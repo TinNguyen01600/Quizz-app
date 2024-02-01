@@ -14,15 +14,8 @@ const MyRadioGroup: React.FC<Props> = ({ category, setCategory }) => {
 	};
 	return (
 		<FormControl>
-			<FormLabel
-				id="demo-controlled-radio-buttons-group"
-				sx={{
-					fontSize: "5vh",
-					fontFamily: "Single Day",
-					color: "yellow",
-				}}
-			>
-				Categories
+			<FormLabel id="demo-controlled-radio-buttons-group">
+				<h2>Categories</h2>
 			</FormLabel>
 			<RadioGroup
 				row
@@ -31,7 +24,6 @@ const MyRadioGroup: React.FC<Props> = ({ category, setCategory }) => {
 				value={category}
 				onChange={handleChange}
 				sx={{ color: "purple" }}
-				// sx={{}}
 			>
 				<FormControlLabel
 					value="art"

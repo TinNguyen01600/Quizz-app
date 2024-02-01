@@ -11,6 +11,7 @@ const MySlider: React.FC<Props> = ({ totalQuestions, setTotalQuestions }) => {
 	};
 	return (
 		<>
+        <h2>Number of questions</h2>
 			<Box sx={{ width: 300 }}>
 				<Slider
 					aria-label="Temperature"

@@ -29,7 +29,7 @@ export const Wrapper = styled.div`
         border: 2px solid white;
         padding: 1vh 4vw;
         background: rgba(0,0,0, 0.3);
-        color: red;
+        color: #ffdb58;
         margin-top: 3vh;
 	}
     .score {
