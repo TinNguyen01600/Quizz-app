@@ -17,6 +17,10 @@ function App() {
 	const [score, setScore] = useState(0);
 	const [gameOver, setGameOver] = useState(true);
 
+    const [totalQuestions, setTotalQuestions] = useState<number>(10);
+	const [category, setCategory] = useState<string>("art");
+    const [difficulty, setDifficulty] = useState<Difficulty>(Difficulty.EASY)
+
 	const startTrivia = async () => {
 		setLoading(true);
 		setGameOver(false);
@@ -67,7 +71,13 @@ function App() {
 				<h1>REACT QUIZZ</h1>
 				{gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
 					<>
-						<Filter />
+						<Filter 
+                            totalQuestions={totalQuestions}
+                            setTotalQuestions={setTotalQuestions}
+                            category={category}
+                            setCategory={setCategory}
+                            setDifficulty={setDifficulty}
+                        />
 						<button className="start" onClick={startTrivia}>
 							Start
 						</button>
